@@ -1,0 +1,6 @@
+1. Nama: Diky Efriansyah
+2. Email: dikyefriansyah2@gmail.com
+3. Sistem Operasi yang digunakan: Windows
+4. Akun Gitlab/Github: https://github.com/DikyEfriansyah
+5. Akun Telegram: diky0101
+6. Bahasa Pemrograman/Stack Yang dikuasai: PHP, Javascript, React, ExpressJS 
