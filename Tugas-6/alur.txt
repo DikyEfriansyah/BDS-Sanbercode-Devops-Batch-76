@@ -1,0 +1,26 @@
+Pertama kali setelah login vps 
+ketik 
+ sudo apt update && sudo apt upgrade -y 
+untuk versi dalam sistem operasi terbaru atau tidak dan melakukan upgrade 
+
+setelah selesai maka melakukan swap
+ sudo fallocate -l 2G /swapfile 
+untuk membuat file yg berkapasitas 2gb pada swapfile
+
+ubah hak akses ke hanya root dengan ketik
+ sudo chmod 600 /swapfile 
+
+
+lalu ubah file swapfile ke format swap dengan command
+sudo mkswap /swapfile
+
+lalu aktifkan swap file file yg sudah dibuat 
+ sudo swapon /swapfile 
+
+agar tidak hilang maka lakukan edit pada file /etc/fstab dengan command
+ sudo nano /etc/fstab 
+
+diisikan dengan
+ /swapfile none swap sw 0 0 
+
+
