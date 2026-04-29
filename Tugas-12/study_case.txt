@@ -1,0 +1,4 @@
+Menghapus servis yang tidak terpakai adalah langkah Hardening Server. 
+Kita membuang beban resource yang tidak perlu agar server lebih responsif, 
+sekaligus menutup semua celah masuk (pintu port) yang tidak diawasi sebelum SSL dipasang, 
+sehingga profil keamanan server menjadi minimalis namun maksimal.
