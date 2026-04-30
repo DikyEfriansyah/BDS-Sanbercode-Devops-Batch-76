@@ -1,0 +1,26 @@
+name: CI Core Test
+
+# Pemicu: Workflow jalan tiap ada push ke branch main
+on:
+  push:
+    branches:
+      - main #
+
+jobs:
+  Test-Pipeline:
+    runs-on: ubuntu-latest # Menggunakan runner server virtual milik GitHub
+    
+    steps:
+      # Langkah 1: Mengambil kode dari repository lu
+      - name: Checkout Code
+        uses: actions/checkout@v3 #
+
+      # Langkah 2: Simulasi eksekusi dan panggil Secret
+      - name: Run Test Script
+        env:
+          MY_SECRET_KEY: ${{ secrets.MY_SECRET_KEY }} # Mengambil nilai dari Secrets
+        run: |
+          echo "Pipeline Berjalan Sukses di GitHub Actions!" #
+          echo "Memeriksa secret key..." #
+          # GitHub akan otomatis menyensor (mask) nilai secret menjadi *** di log
+          echo "Secret Key: $MY_SECRET_KEY" #
