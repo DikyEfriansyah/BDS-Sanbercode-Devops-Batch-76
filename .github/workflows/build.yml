@@ -1,0 +1,27 @@
+name: CI/CD Build Artifact
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create build directory and file
+        run: |
+          mkdir dist
+          echo "Ini adalah hasil build otomatis Artifact" > dist/index.html
+
+      - name: Upload Build Artifact
+        uses: actions/checkout@v4 # Menggunakan v4 untuk kompatibilitas terbaru
+        with:
+          name: hasil-build-web
+          path: dist/
+          retention-days: 7
