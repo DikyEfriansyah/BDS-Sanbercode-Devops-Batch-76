@@ -20,7 +20,7 @@ jobs:
           echo "Ini adalah hasil build otomatis Artifact" > dist/index.html
 
       - name: Upload Build Artifact
-        uses: actions/checkout@v4 # Menggunakan v4 untuk kompatibilitas terbaru
+        uses: actions/upload-artifact@v4 # Menggunakan v4 untuk kompatibilitas terbaru
         with:
           name: hasil-build-web
           path: dist/
