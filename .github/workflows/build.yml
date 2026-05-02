@@ -25,3 +25,30 @@ jobs:
           name: hasil-build-web
           path: dist/
           retention-days: 7
+deploy-to-vps:
+    runs-on: ubuntu-latest
+    needs: build-app # Memastikan job build selesai dulu
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: hasil-build-web
+          path: dist/
+
+      - name: Transfer file via SCP to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "dist/"
+          target: "/var/www/my-app" # Sesuaikan path tujuan
+
+      - name: Execute Remote SSH Command
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            echo "Deployment Selesai!"
