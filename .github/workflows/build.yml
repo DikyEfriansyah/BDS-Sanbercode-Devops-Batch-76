@@ -1,15 +1,12 @@
-name: CI/CD Build Artifact
+name: CI/CD Build & Deploy
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
   build-app:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,12 +17,13 @@ jobs:
           echo "Ini adalah hasil build otomatis Artifact" > dist/index.html
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4 # Menggunakan v4 untuk kompatibilitas terbaru
+        uses: actions/upload-artifact@v4
         with:
           name: hasil-build-web
           path: dist/
           retention-days: 7
-deploy-to-vps:
+
+  deploy-to-vps:
     runs-on: ubuntu-latest
     needs: build-app # Memastikan job build selesai dulu
     steps:
@@ -42,7 +40,7 @@ deploy-to-vps:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: "dist/"
-          target: "/var/www/my-app" # Sesuaikan path tujuan
+          target: "/var/www/my-app" # Sesuaikan path tujuan di VPS kamu
 
       - name: Execute Remote SSH Command
         uses: appleboy/ssh-action@v1.0.3
